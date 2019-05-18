@@ -1,0 +1,11 @@
+- Frame counter [X]
+- Paddle color [X]
+- Paddle position [X]
+- Fix bspwm window size [X]
+- Disallow resize even on bspwm [ ]
+- Separate player/AI paddle logic [ ]
+- Generate makefile/CMake file [ ]
+- Create custom string class [ ]
+- Create c-style format method for string class [ ]
+- Add timestamp to ILogger::log() methods impls [ ]
+
