@@ -33,14 +33,15 @@ void Config::refresh()
 
     using boost::algorithm::trim;
     using std::string;
+    using std::getline;
 
     configFile.open(configFilePath);
     string curLine;
     while (!configFile.eof()) {
-        std::getline(configFile, curLine);
+        getline(configFile, curLine);
         string key, value;
 
-        // ignore comments
+        // Ignore comments
         size_t delimPos = curLine.find('#');
         if (delimPos != string::npos) {
             curLine = curLine.substr(0, delimPos);

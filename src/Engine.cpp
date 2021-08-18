@@ -11,6 +11,8 @@
 
 
 using std::make_unique;
+using sf::Keyboard;
+
 
 Engine& Engine::getEngine()
 {
@@ -22,6 +24,7 @@ Engine::Engine() :
     renderTarget(nullptr),
     frameCount(0)
 {
+  init();
 }
 
 Engine::~Engine()
@@ -75,11 +78,11 @@ void Engine::run()
 {
     sf::Clock clock;
     while (renderWindow->isOpen()) {
+        clock.restart();
         ++frameCount;
 
         sf::Event event;
         while (renderWindow->pollEvent(event)) {
-            using sf::Keyboard;
             if (event.key.code == Keyboard::Key::Escape ||
                 event.type == sf::Event::Closed) {
                 renderWindow->close();
@@ -93,7 +96,6 @@ void Engine::run()
         }
 
         update(clock.getElapsedTime().asSeconds());
-        clock.restart();
 
         render();
     }
@@ -101,12 +103,14 @@ void Engine::run()
 
 void Engine::update(float delta)
 {
-    // check collisions
+    // Check collisions
     for (uint32_t iter = 0; iter < colliders.size(); ++iter) {
         for (uint32_t remaining = iter+1; remaining < colliders.size(); ++remaining) {
             colliders[iter]->checkCollision(*(colliders[remaining]));
         }
     }
+
+    // Update all game objects
     for (auto& gameObject : gameObjects) {
         gameObject->update(delta);
     }

@@ -7,7 +7,7 @@
 
 /** Stores configuration data in key-value pairs */
 class Config {
-    using ConfigTableType = std::unordered_map<std::string, std::string>;
+    using ConfigTable = std::unordered_map<std::string, std::string>;
 
     static const std::string DefaultConfigFile;
 
@@ -23,7 +23,7 @@ public:
     void refresh();
 
 private:
-    ConfigTableType configTable;
+    ConfigTable configTable;
     std::string configFilePath;
     std::ifstream configFile;
 
